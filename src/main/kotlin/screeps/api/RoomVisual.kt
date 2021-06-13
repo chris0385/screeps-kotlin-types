@@ -17,6 +17,8 @@ external class RoomVisual(roomName: String) {
     fun text(text: String, position: RoomPosition, style: TextStyle = definedExternally): RoomVisual
     fun clear(): RoomVisual
     fun getSize(): Double
+    fun export(): String
+    fun import(value: String)
 
     interface Style : Options {
         var opacity: Double?

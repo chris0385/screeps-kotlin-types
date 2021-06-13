@@ -1,6 +1,8 @@
 package screeps.utils.memory
 
+import screeps.api.Game
 import screeps.api.MemoryMarker
+import screeps.api.Identifiable
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
@@ -40,6 +42,14 @@ fun <T> memory(): ReadWriteProperty<MemoryMarker, T?> = MemoryDelegate { null }
  * @see memory
  */
 fun <T : Any> memory(defaultValue: () -> T): ReadWriteProperty<MemoryMarker, T> = MemoryDelegate(defaultValue)
+
+/**
+ * Creates a nullable property to store game-objects in Memory by their id
+ *
+ * @see memory
+ */
+fun <T : Identifiable> memoryForGameObject(defaultValue: () -> T? = { null }): ReadWriteProperty<MemoryMarker, T?> =
+    MemoryMappingDelegate(defaultValue, { it?.id.unsafeCast<String>() }, { Game.getObjectById(it) })
 
 /**
  * Specifically for enums

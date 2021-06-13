@@ -52,15 +52,15 @@ external class RoomPosition(x: Int, y: Int, roomName: String) : NavigationTarget
     fun getDirectionTo(target: RoomObject): DirectionConstant
     fun getRangeTo(x: Int, y: Int): Int
     fun getRangeTo(target: RoomPosition): Int
-    fun getRangeTo(target: RoomObject): Int
+    fun getRangeTo(target: HasPosition): Int
     fun inRangeTo(x: Int, y: Int, range: Int): Boolean
     fun inRangeTo(target: RoomPosition, range: Int): Boolean
     fun isEqualTo(x: Int, y: Int): Boolean
     fun isEqualTo(target: RoomPosition): Boolean
-    fun isEqualTo(target: RoomObject): Boolean
+    fun isEqualTo(target: HasPosition): Boolean
     fun isNearTo(x: Int, y: Int): Boolean
     fun isNearTo(target: RoomPosition): Boolean
-    fun isNearTo(target: RoomObject): Boolean
+    fun isNearTo(target: HasPosition): Boolean
     fun look(): Array<Look>
     fun <T> lookFor(type: LookConstant<T>): Array<T>?
 

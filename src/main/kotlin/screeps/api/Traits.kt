@@ -1,7 +1,9 @@
 package screeps.api
 
+typealias ScreepId = String
+
 external interface Identifiable {
-    val id: String
+    val id: ScreepId
 }
 
 external interface Harvestable
