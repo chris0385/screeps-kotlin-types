@@ -1,5 +1,6 @@
 package screeps.api
 
+import screeps.api.structures.Structure
 import screeps.api.structures.StructureController
 import screeps.api.structures.StructureStorage
 import screeps.api.structures.StructureTerminal
@@ -53,9 +54,48 @@ abstract external class Room {
         var direction: DirectionConstant
     }
 
-    interface LookAtAreaArrayItem : RoomPosition.Look {
+    interface CoordinateInRoom {
         val x: Int
         val y: Int
+    }
+
+    interface LookAtAreaArrayItem : RoomPosition.Look, CoordinateInRoom
+
+    interface LookCreep : CoordinateInRoom {
+        val creep: Creep
+    }
+    interface LookPowerCreep : CoordinateInRoom {
+        val powerCreep: PowerCreep
+    }
+    interface LookStructure : CoordinateInRoom {
+        val structure: Structure
+    }
+    interface LookTerrain : CoordinateInRoom {
+        val terrain: TerrainConstant
+    }
+    interface LookConstructionSite : CoordinateInRoom {
+        val constructionSite: ConstructionSite
+    }
+    interface LookResource : CoordinateInRoom {
+        val resource: Resource
+    }
+    interface LookTombstone : CoordinateInRoom {
+        val tombstone: Tombstone
+    }
+    interface LookSource : CoordinateInRoom {
+        val source: Source
+    }
+    interface LookMineral : CoordinateInRoom {
+        val mineral: Mineral
+    }
+    interface LookDeposit : CoordinateInRoom {
+        val deposit: Deposit
+    }
+    interface LookFlag : CoordinateInRoom {
+        val flag: Flag
+    }
+    interface LookRuin : CoordinateInRoom {
+        val ruin: Ruin
     }
 
     companion object {
@@ -71,6 +111,47 @@ fun Room.lookAtArea(top: Int, left: Int, bottom: Int, right: Int): LookAtAreaRes
 
 fun Room.lookAtAreaAsArray(top: Int, left: Int, bottom: Int, right: Int): Array<Room.LookAtAreaArrayItem> =
     this.asDynamic().lookAtArea(top, left, bottom, right, true).unsafeCast<Array<Room.LookAtAreaArrayItem>>()
+
+
+fun <T> Room.lookForAtArea(type: LookConstant<T>, top: Int, left: Int, bottom: Int, right: Int): Record<Int, Record<Int, Array<T>>> =
+    asDynamic().lookForAtArea(type, top, left, bottom, right, false)
+
+
+fun <T: Creep> Room.lookForAtAreaAsArray(type: LookConstant<T>, top: Int, left: Int, bottom: Int, right: Int): Array<Room.LookCreep> =
+    asDynamic().lookForAtArea(type, top, left, bottom, right, true)
+
+fun <T: PowerCreep> Room.lookForAtAreaAsArray(type: LookConstant<T>, top: Int, left: Int, bottom: Int, right: Int): Array<Room.LookPowerCreep> =
+    asDynamic().lookForAtArea(type, top, left, bottom, right, true)
+
+fun <T: Structure> Room.lookForAtAreaAsArray(type: LookConstant<T>, top: Int, left: Int, bottom: Int, right: Int): Array<Room.LookStructure> =
+    asDynamic().lookForAtArea(type, top, left, bottom, right, true)
+
+fun <T: TerrainConstant> Room.lookForAtAreaAsArray(type: LookConstant<T>, top: Int, left: Int, bottom: Int, right: Int): Array<Room.LookTerrain> =
+    asDynamic().lookForAtArea(type, top, left, bottom, right, true)
+
+fun <T: ConstructionSite> Room.lookForAtAreaAsArray(type: LookConstant<T>, top: Int, left: Int, bottom: Int, right: Int): Array<Room.LookConstructionSite> =
+    asDynamic().lookForAtArea(type, top, left, bottom, right, true)
+
+fun <T: Resource> Room.lookForAtAreaAsArray(type: LookConstant<T>, top: Int, left: Int, bottom: Int, right: Int): Array<Room.LookResource> =
+    asDynamic().lookForAtArea(type, top, left, bottom, right, true)
+
+fun <T: Tombstone> Room.lookForAtAreaAsArray(type: LookConstant<T>, top: Int, left: Int, bottom: Int, right: Int): Array<Room.LookTombstone> =
+    asDynamic().lookForAtArea(type, top, left, bottom, right, true)
+
+fun <T: Source> Room.lookForAtAreaAsArray(type: LookConstant<T>, top: Int, left: Int, bottom: Int, right: Int): Array<Room.LookSource> =
+    asDynamic().lookForAtArea(type, top, left, bottom, right, true)
+
+fun <T: Mineral> Room.lookForAtAreaAsArray(type: LookConstant<T>, top: Int, left: Int, bottom: Int, right: Int): Array<Room.LookMineral> =
+    asDynamic().lookForAtArea(type, top, left, bottom, right, true)
+
+fun <T: Deposit> Room.lookForAtAreaAsArray(type: LookConstant<T>, top: Int, left: Int, bottom: Int, right: Int): Array<Room.LookDeposit> =
+    asDynamic().lookForAtArea(type, top, left, bottom, right, true)
+
+fun <T: Flag> Room.lookForAtAreaAsArray(type: LookConstant<T>, top: Int, left: Int, bottom: Int, right: Int): Array<Room.LookFlag> =
+    asDynamic().lookForAtArea(type, top, left, bottom, right, true)
+
+fun <T: Ruin> Room.lookForAtAreaAsArray(type: LookConstant<T>, top: Int, left: Int, bottom: Int, right: Int): Array<Room.LookRuin> =
+    asDynamic().lookForAtArea(type, top, left, bottom, right, true)
 
 external interface FindPathOptions : Options {
     var ignoreCreeps: Boolean? get() = definedExternally; set(value) = definedExternally

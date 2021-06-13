@@ -67,10 +67,16 @@ external class RoomPosition(x: Int, y: Int, roomName: String) : NavigationTarget
     interface Look {
         val type: LookConstant<Any>
         val creep: Creep?
+        val powerCreep: PowerCreep?
         val structure: Structure?
         val terrain: TerrainConstant?
         val constructionSite: ConstructionSite?
         val resource: Resource?
+        val tombstone: Tombstone?
+        val mineral: Mineral?
+        val deposit: Deposit?
+        val flag: Flag?
+        val ruin: Ruin?
     }
 }
 
