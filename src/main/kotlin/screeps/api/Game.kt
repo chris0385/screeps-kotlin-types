@@ -83,11 +83,25 @@ external object Game {
          */
         fun getUsed(): Double
 
-        fun getHeapStatistics(): Json
+        fun getHeapStatistics(): HeapStatistics?
         fun setShardLimits(limits: Record<String, Int>): ScreepsReturnCode
         fun unlock(): ScreepsReturnCode
         fun generatePixel(): ScreepsReturnCode
         fun halt()
+    }
+
+    @Suppress("PropertyName")
+    interface HeapStatistics {
+        val total_heap_size: Int
+        val total_heap_size_executable: Int
+        val total_physical_size: Int
+        val total_available_size: Int
+        val used_heap_size: Int
+        val heap_size_limit: Int
+        val malloced_memory: Int
+        val peak_malloced_memory: Int
+        val does_zap_garbage: Int
+        val externally_allocated_size: Int
     }
 
     interface GCPL {
