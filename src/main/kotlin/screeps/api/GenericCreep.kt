@@ -26,5 +26,5 @@ external interface MoveToOptions : FindPathOptions {
     var reusePath: Int? get() = definedExternally; set(value) = definedExternally
     var serializeMemory: Boolean? get() = definedExternally; set(value) = definedExternally
     var noPathFinding: Boolean? get() = definedExternally; set(value) = definedExternally
-    var visualizePathStyle: RoomVisual.Style? get() = definedExternally; set(value) = definedExternally
+    var visualizePathStyle: RoomVisual.ShapeStyle? get() = definedExternally; set(value) = definedExternally
 }

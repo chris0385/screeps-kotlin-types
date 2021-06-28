@@ -99,7 +99,7 @@ abstract external class Room {
     }
 
     companion object {
-        fun serializePath(path: Array<PathStep>)
+        fun serializePath(path: Array<PathStep>): String
         fun deserializePath(path: String): Array<PathStep>
     }
 }
